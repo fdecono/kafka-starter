@@ -1,6 +1,7 @@
 from kafka import KafkaConsumer
 import json
 from collections import defaultdict
+import time
 
 consumer = KafkaConsumer(
   "clicks",
@@ -18,4 +19,4 @@ for message in consumer:
   event = message.value
   user = event["user"]
   click_counts[user]+= 1
-  print(f"User {user} clicked {event['url']} {click_counts[user]} times")
+  print(f"[{time.strftime('%H:%M:%S')}] - User {user} clicked {event['url']} {click_counts[user]} times")
